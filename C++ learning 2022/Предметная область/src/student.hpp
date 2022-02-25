@@ -1,33 +1,21 @@
 #ifndef _STUDENT_HPP_
 #define _STUDENT_HPP_
+#include "human.hpp"
 
-class Human{
-    public:
-        Human(int age, const char *name);
+class Student: private Human
+{
+public:
+    Student(uint8_t age, const char *name, uint16_t year_start, uint8_t university_year, const char *group);
 
-    private:
-        friend std::ostream& operator<<(std::ostream& out, const Human& self);
+private:
+    using Human::age;
+    using Human::name;
+    friend std::ostream &operator<< (std::ostream &out, const Student &self);
 
-    protected:
-        int age = 0;
-        char name[30] = "";
-
-};
-
-class Student: private Human{
-    public:
-        Student(int age, const char *name, int year_start, int university_year);
-
-    private:
-        using Human::age;
-        using Human::name;
-        friend std::ostream &operator<< (std::ostream &out, const Student &self);
-
-    protected:
-        int year_start;
-        int university_year;
-        
-
+protected:
+    uint16_t year_start;
+    uint8_t university_year;
+    char group[10];
 };
 
 #endif //_STUDENT_HPP_
